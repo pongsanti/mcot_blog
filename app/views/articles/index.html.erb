@@ -1,0 +1,28 @@
+
+<h1>Listing articles</h1>
+<script>
+  setTimeout(function(){
+    location = '<%=articles_path%>'
+  }, 5000)
+</script>
+
+<%= link_to 'New article', new_article_path %>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Text</th>
+    </tr>
+  </thead>
+ 
+  <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.id %></td>
+      <td><%= article.text %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
+      <td><%= link_to 'Destroy', article_path(article),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>      
+    </tr>
+  <% end %>
+</table>
