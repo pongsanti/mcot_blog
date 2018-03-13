@@ -29,9 +29,7 @@
         <td><%= article.id %></td>
         <td class='<%=color=%>'><%= text %></td>
         <td><%= link_to article.filename, "/uploads/#{article.filename}", target: '_blank' %></td>
-        <td><%= link_to 'Destroy', article_path(article),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %></td>      
+        <td><%= link_to 'Destroy', article_path(article), method: :delete %></td>      
       </tr>
     <% end %>
   </table>
