@@ -6,8 +6,9 @@
   }, 5000)
 </script>
 
-<%= link_to 'New article', new_article_path %>
+<%#= link_to 'New article', new_article_path %>
 <div class="table-responsive">
+ <p>page refresh every 5 seconds</p>
   <table class='table table-sm table-striped table-hover'>
     <thead>
       <tr>
@@ -17,10 +18,17 @@
     </thead>
   
     <% @articles.each do |article| %>
+      <% text = article.text %>
+      <% color = if text.include?('+')
+                   'text-success'
+                 elsif text.include?('-')
+                   'text-danger'
+                 end
+      %>
       <tr>
         <td><%= article.id %></td>
-        <td><%= article.text %></td>
-        <td><%= link_to 'Show', article_path(article) %></td>
+        <td class='<%=color=%>'><%= text %></td>
+        <td><%= link_to 'view image', "/uploads/#{article.filename}", target: '_blank' %></td>
         <td><%= link_to 'Destroy', article_path(article),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %></td>      

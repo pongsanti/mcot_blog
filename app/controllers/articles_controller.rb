@@ -14,10 +14,17 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    #write files
+    file_params = params[:article][:file]
+    File.open(Rails.root.join('public', 'uploads', file_params.original_filename), 'wb') do |file|
+      file.write(file_params.read)
+    end
 
+    @article = Article.new(article_params)
+    @article.filename = file_params.original_filename
     @article.save
-    redirect_to @article
+
+    render plain: "OK"
   end
 
   def destroy
