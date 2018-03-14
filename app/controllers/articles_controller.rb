@@ -20,6 +20,11 @@ class ArticlesController < ApplicationController
       file.write(file_params.read)
     end
 
+    crop_file_params = params[:article][:crop_file]
+    File.open(Rails.root.join('public', 'uploads', crop_file_params.original_filename), 'wb') do |file|
+      file.write(crop_file_params.read)
+    end
+
     @article = Article.new(article_params)
     @article.filename = file_params.original_filename
     @article.save

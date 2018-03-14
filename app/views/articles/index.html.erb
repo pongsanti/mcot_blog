@@ -14,11 +14,15 @@
       <tr>
         <th>Id</th>
         <th>Text</th>
+        <th>Crop</th>
       </tr>
     </thead>
-  
+
     <% @articles.each do |article| %>
       <% text = article.text %>
+      <% filename = article.filename %>
+      <% crop_file_name = filename.dup %>
+      <% crop_file_name = crop_file_name.insert(crop_file_name.index('.'), '_c') %>
       <% color = if text.include?('+')
                    'text-success'
                  elsif text.include?('-')
@@ -27,9 +31,10 @@
       %>
       <tr>
         <td><%= article.id %></td>
-        <td class='<%=color=%>'><%= text %></td>
-        <td><%= link_to article.filename, "/uploads/#{article.filename}", target: '_blank' %></td>
-        <td><%= link_to 'Destroy', article_path(article), method: :delete %></td>      
+        <td class='<%=color=%>'><b><%= text %></b></td>
+        <td><img src='<%="/uploads/#{crop_file_name}"%>' /></td>
+        <td><%= link_to filename, "/uploads/#{filename}", target: '_blank' %></td>
+        <td><%= link_to 'Destroy', article_path(article), method: :delete %></td>
       </tr>
     <% end %>
   </table>
