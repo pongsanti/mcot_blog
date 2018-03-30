@@ -20,7 +20,7 @@
       <tr>
         <td><%= m.id %></td>
         <td><%= m.code %></td>
-        <td><%= m.updated_at.localtime %></td>
+        <td><%= m.updated_at.getlocal('+07:00') %></td>
       </tr>
     <% end %>
   </table>
