@@ -1,0 +1,27 @@
+<h1>Listing Machines</h1>
+<script>
+  setTimeout(function(){
+    location = '<%=machines_path%>'
+  }, 5000)
+</script>
+
+<div class="table-responsive">
+ <p>page refresh every 5 seconds</p>
+  <table class='table table-sm table-striped table-hover'>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Code</th>
+        <th>Last Received Connection</th>
+      </tr>
+    </thead>
+
+    <% @machines.each do |m| %>
+      <tr>
+        <td><%= m.id %></td>
+        <td><%= m.code %></td>
+        <td><%= m.updated_at.localtime %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
