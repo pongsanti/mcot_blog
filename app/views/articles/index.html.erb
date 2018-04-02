@@ -12,9 +12,12 @@
   <table class='table table-sm table-striped table-hover'>
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Text</th>
+        <th width='5%'>Id</th>
+        <th width='30%'>Text</th>
         <th>Crop</th>
+        <th>Image link</th>
+        <th width='10%'>create_time (+from above)</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -34,8 +37,10 @@
         <td class='<%=color=%>'><b><%= text %></b></td>
         <td><img src='<%="/uploads/#{crop_file_name}"%>' /></td>
         <td><%= link_to filename, "/uploads/#{filename}", target: '_blank' %></td>
-        <td><%= link_to 'Destroy', article_path(article), method: :delete %></td>
+        <td><%= @last_create_at ? distance_of_time_in_words(article.created_at, @last_create_at) : '-'%></td>
+        <td><%= link_to 'X', article_path(article), method: :delete, title: 'delete' %></td>
       </tr>
+    <% @last_create_at = article.created_at %>
     <% end %>
   </table>
 </div>
