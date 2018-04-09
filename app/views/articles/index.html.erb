@@ -1,14 +1,13 @@
 
 <h1>Listing articles</h1>
 <script>
-  setTimeout(function(){
-    location = '<%=articles_path%>'
-  }, 10000)
+  const setLocation = () => location = '<%=articles_path%>';
+  let timer = setTimeout(setLocation, 10000)
 </script>
 
 <%#= link_to 'New article', new_article_path %>
 <div class="table-responsive">
- <p>page refresh every 5 seconds</p>
+ <label><%= check_box :article, :refresh, checked: 'checked'  %> page refresh every 10 seconds</label>
   <table class='table table-sm table-striped table-hover'>
     <thead>
       <tr>
@@ -44,3 +43,16 @@
     <% end %>
   </table>
 </div>
+
+<script>
+  const chkBoxChange = (event) => {
+    const checked = event.currentTarget.checked;
+    if (checked) {
+      timer = setTimeout(setLocation, 10000)
+    } else {
+      clearTimeout(timer)
+    }
+  }
+  let chkbox = document.getElementById('article_refresh');
+  chkbox.addEventListener('change', chkBoxChange);
+</script>
