@@ -12,10 +12,11 @@
     <thead>
       <tr>
         <th width='5%'>Id</th>
-        <th width='30%'>Text</th>
+        <th width='25%'>Text</th>
         <th>Crop</th>
         <th>Image link</th>
-        <th width='10%'>create_time (+from above)</th>
+        <th>Created</th>
+        <th class='text-right' width='3%'>(+^)</th>
         <th></th>
       </tr>
     </thead>
@@ -36,7 +37,8 @@
         <td class='<%=color=%>'><b><%= text %></b></td>
         <td><img src='<%="/uploads/#{crop_file_name}"%>' /></td>
         <td><%= link_to filename, "/uploads/#{filename}", target: '_blank' %></td>
-        <td><%= @last_create_at ? distance_of_time_in_words(article.created_at, @last_create_at) : '-'%></td>
+        <td><%= article.created_at.localtime().strftime('%T') %></td>
+        <td class='text-right'><%= @last_create_at ? ((@last_create_at - article.created_at)/1.second).to_i : '-'  %></td>
         <td><%= link_to 'X', article_path(article), method: :delete, title: 'delete' %></td>
       </tr>
     <% @last_create_at = article.created_at %>
