@@ -23,9 +23,14 @@
 
     <% @articles.each do |article| %>
       <% text = article.text %>
-      <% filename = article.filename %>
-      <% crop_file_name = filename.dup %>
-      <% crop_file_name = crop_file_name.insert(crop_file_name.index('.'), '_c') %>
+<%
+  filename = article.filename
+  crop_file_name = nil
+  unless filename.nil?
+    crop_file_name = filename.dup
+    crop_file_name = crop_file_name.insert(crop_file_name.index('.'), '_c')
+  else
+%>
       <% color = if text.include?('+')
                    'text-success'
                  elsif text.include?('-')
