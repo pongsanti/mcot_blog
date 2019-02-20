@@ -29,7 +29,7 @@
   unless filename.nil?
     crop_file_name = filename.dup
     crop_file_name = crop_file_name.insert(crop_file_name.index('.'), '_c')
-  else
+  end
 %>
       <% color = if text.include?('+')
                    'text-success'
