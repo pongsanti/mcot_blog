@@ -14,19 +14,26 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    #write files
     file_params = params[:article][:file]
-    File.open(Rails.root.join('public', 'uploads', file_params.original_filename), 'wb') do |file|
-      file.write(file_params.read)
-    end
 
-    crop_file_params = params[:article][:crop_file]
-    File.open(Rails.root.join('public', 'uploads', crop_file_params.original_filename), 'wb') do |file|
-      file.write(crop_file_params.read)
+    unless file_params.nil?
+    #write files
+      File.open(Rails.root.join('public', 'uploads', file_params.original_filename), 'wb') do |file|
+        file.write(file_params.read)
+      end
+
+      crop_file_params = params[:article][:crop_file]
+      File.open(Rails.root.join('public', 'uploads', crop_file_params.original_filename), 'wb') do |file|
+        file.write(crop_file_params.read)
+      end
     end
 
     @article = Article.new(article_params)
-    @article.filename = file_params.original_filename
+
+    unless file_params.nil?
+      @article.filename = file_params.original_filename
+    end
+
     @article.save
 
     render plain: "OK"
