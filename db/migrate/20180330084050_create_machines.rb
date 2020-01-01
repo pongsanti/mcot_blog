@@ -1,4 +1,4 @@
-class CreateMachines < ActiveRecord::Migration[5.1]
+class CreateMachines < ActiveRecord::Migration[6.0]
   def change
     create_table :machines do |t|
       t.string :code

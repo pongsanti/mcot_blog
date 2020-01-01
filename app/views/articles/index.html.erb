@@ -16,6 +16,7 @@
         <th>Crop</th>
         <th>Image link</th>
         <th>Created</th>
+        <th>Client</th>
         <th class='text-right' width='3%'>(+^)</th>
         <th></th>
       </tr>
@@ -43,6 +44,7 @@
         <td><img src='<%="/uploads/#{crop_file_name}"%>' /></td>
         <td><%= link_to filename, "/uploads/#{filename}", target: '_blank' %></td>
         <td><%= article.created_at.localtime().strftime('%T') %></td>
+        <td><%= article.client %></td>
         <td class='text-right'><%= @last_create_at ? ((@last_create_at - article.created_at)/1.second).to_i : '-'  %></td>
         <td><%= link_to 'X', article_path(article), method: :delete, title: 'delete' %></td>
       </tr>
